@@ -7,4 +7,7 @@ ENV RANCHER_SERVER="http://localhost/"
 ENV RANCHER_ACCESS_KEY=""
 ENV RANCHER_SECRET_KEY=""
 
+ARG VERSION="development"
+LABEL VERSION=$VERSION
+
 CMD ["stablehand"]
