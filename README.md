@@ -1,4 +1,4 @@
-# Stablehand
+# Stablehand [![Build Status](https://drone.sierrasoftworks.com/api/badges/SierraSoftworks/stablehand/status.svg)](https://drone.sierrasoftworks.com/SierraSoftworks/stablehand)
 **A cleanup tool for Rancher servers**
 
 Stablehand is a tool designed to keep your Rancher server in a nice, clean, maintanable
