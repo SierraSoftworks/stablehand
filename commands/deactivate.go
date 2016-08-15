@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/urfave/cli"
 )
@@ -16,12 +16,12 @@ var Deactivate cli.Command = buildMapHostsFunction(cli.Command{
 		c.Filters["hostId"] = c.CLI.Args().Get(0)
 	}
 }, func(c *mapContext) error {
-	log.Printf("Deactivating host #%s %s: ", c.Host.Id, c.Host.Hostname)
+	fmt.Printf("Deactivating host #%s %s: ", c.Host.Id, c.Host.Hostname)
 	_, err := c.Rancher.Host.ActionDeactivate(c.Host)
 	if err != nil {
-		log.Printf("Failed [%s]\n", err)
+		fmt.Printf("Failed [%s]\n", err)
 	} else {
-		log.Printf("Success\n")
+		fmt.Printf("Success\n")
 	}
 
 	return nil

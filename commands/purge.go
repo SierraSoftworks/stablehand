@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/urfave/cli"
 )
@@ -16,12 +16,12 @@ var Purge cli.Command = buildMapHostsFunction(cli.Command{
 		c.Filters["hostId"] = c.CLI.Args().Get(0)
 	}
 }, func(c *mapContext) error {
-	log.Printf("Purging host #%s %s: ", c.Host.Id, c.Host.Hostname)
+	fmt.Printf("Purging host #%s %s: ", c.Host.Id, c.Host.Hostname)
 	_, err := c.Rancher.Host.ActionPurge(c.Host)
 	if err != nil {
-		log.Printf("Failed [%s]\n", err)
+		fmt.Printf("Failed [%s]\n", err)
 	} else {
-		log.Printf("Success\n")
+		fmt.Printf("Success\n")
 	}
 
 	return nil
