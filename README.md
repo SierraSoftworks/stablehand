@@ -15,6 +15,25 @@ certain conditions. You would, for example, run it with the following `crontab`.
 0 * * * * stablehand remove --state=inactive
 ```
 
+## Docker
+
+Stablehand is also available as a Docker image at `sierrasoftworks/stablehand`, allowing you to run this as a scheduled Docker container on your Rancher infrastructure for added-meta. When doing so, it may be easiest to use an environment file to hold your
+config.
+
+```
+RANCHER_SERVER=https://localhost
+RANCHER_ACCESS_KEY=abcdefg
+RANCHER_SECRET_KEY=abcdefg
+```
+
+```
+# Deactivate hosts which are in the reconnecting state
+docker run --rm --env-file stablehand.env sierrasoftworks/stablehand stablehand deactivate --agent-state=reconnecting
+
+# Remove hosts which are in the inactive state
+docker run --rm --env-file stablehand.env sierrasoftworks/stablehand stablehand remove --state=inactive
+```
+
 ## `man stablehand`
 
 ```
