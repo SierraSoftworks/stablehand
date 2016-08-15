@@ -1,0 +1,24 @@
+workspace:
+    base: /go
+    path: src/github.com/SierraSoftworks/stablehand
+
+pipeline:
+
+    go:build:
+        image: golang:1.6
+        commands:
+            - go get ./...
+            - go test ./...
+            - CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-s' -o stablehand "-X main.tag=$DRONE_TAG" "-X main.sha=$DRONE_COMMIT_SHA" "-X main.branch=$DRONE_COMMIT_BRANCH"
+
+    docker:
+        repo: sierrasoftworks/stablehand
+        tag:
+            - latest
+            - "${DRONE_COMMIT_BRANCH}"
+            - "go"
+        username: "${DOCKER_USERNAME}"
+        password: "${DOCKER_PASSWORD}"
+        email: "${DOCKER_EMAIL}"
+        build_args:
+            - "VERSION=${DRONE_COMMIT_SHA}"
