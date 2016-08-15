@@ -9,13 +9,10 @@ certain conditions. You would, for example, run it with the following `crontab`.
 
 ```crontab
 # Deactivate hosts which are in the reconnecting state every 15 minutes
-*/15 * * * * stablehand deactivate --state reconnecting
+*/15 * * * * stablehand deactivate --agent-state=reconnecting
 
 # Remove hosts which are in the inactive state on the hour
-0 * * * * stablehand remove --state inactive
-
-# Purge hosts which are in the removed state at midnight
-0 0 * * * stablehand purge --state removed
+0 * * * * stablehand remove --state=inactive
 ```
 
 ## `man stablehand`
