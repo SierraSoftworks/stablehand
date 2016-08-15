@@ -12,7 +12,7 @@
             "isBuildCommand": true,
             "args": [
                 "-o",
-                "rancher-host-cleanup.exe"
+                "stablehand.exe"
             ]
         },
         {
