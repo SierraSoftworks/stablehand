@@ -17,7 +17,7 @@ var Remove cli.Command = buildMapHostsFunction(cli.Command{
 	}
 }, func(c *mapContext) error {
 	log.Printf("Removing host #%s %s: ", c.Host.Id, c.Host.Hostname)
-	_, err := c.Rancher.Host.ActionPurge(c.Host)
+	_, err := c.Rancher.Host.ActionRemove(c.Host)
 	if err != nil {
 		log.Printf("Failed [%s]\n", err)
 	} else {
