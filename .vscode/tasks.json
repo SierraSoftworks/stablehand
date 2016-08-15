@@ -10,10 +10,7 @@
         {
             "taskName": "build",
             "isBuildCommand": true,
-            "args": [
-                "-o",
-                "stablehand.exe"
-            ]
+            "args": []
         },
         {
             "taskName": "test",
