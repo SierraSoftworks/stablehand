@@ -9,7 +9,7 @@ pipeline:
         commands:
             - go get ./...
             - go test ./...
-            - "CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-s' -o stablehand -X '''main.version=${DRONE_TAG=v1.0.0}-${DRONE_BRANCH}.${DRONE_COMMIT:0:6}'''"
+            - "CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-s' -o stablehand -X '''main.version='${DRONE_TAG=v1.0.0}-${DRONE_BRANCH}.${DRONE_COMMIT:0:6}''''"
 
     docker:
         repo: sierrasoftworks/stablehand
