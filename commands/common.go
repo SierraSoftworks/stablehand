@@ -30,7 +30,11 @@ func buildMapHostsFunction(cmd cli.Command, filter func(c *filterContext), apply
 		cmd.Flags,
 		cli.StringFlag{
 			Name:  "state",
-			Usage: "All hosts which are currently in the specified state.\nOne of active|reconnecting|deactivating|inactive|purging|purged|removing|removed",
+			Usage: "All hosts which are currently in the specified state.\nOne of active|deactivating|inactive|purging|purged|removing|removed",
+		},
+		cli.StringFlag{
+			Name:  "agent-state",
+			Usage: "All hosts whose agents are currently in the specified state.\nOne of active|reconnecting|deactivating|inactive|purging|purged|removing|removed",
 		})
 
 	cmd.Action = func(c *cli.Context) error {
@@ -45,6 +49,10 @@ func buildMapHostsFunction(cmd cli.Command, filter func(c *filterContext), apply
 
 		if c.IsSet("state") {
 			listOpts.Filters["state"] = c.String("state")
+		}
+
+		if c.IsSet("agent-state") {
+			listOpts.Filters["agentState"] = c.String("agent-state")
 		}
 
 		filter(&filterContext{
