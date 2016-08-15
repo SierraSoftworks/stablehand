@@ -13,6 +13,6 @@ var List cli.Command = buildMapHostsFunction(cli.Command{
 }, func(c *filterContext) {
 
 }, func(c *mapContext) error {
-	fmt.Printf("#%s %s - %s\n", c.Host.Id, c.Host.Hostname, c.Host.State)
+	fmt.Printf("#%s %s - state=%s agent-state=%s transitioning=%s transitioning-message=%s\n", c.Host.Id, c.Host.Hostname, c.Host.State, c.Host.AgentState, c.Host.Transitioning, c.Host.TransitioningMessage)
 	return nil
 })
