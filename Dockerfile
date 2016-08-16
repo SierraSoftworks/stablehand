@@ -3,9 +3,9 @@ ADD stablehand /
 
 ENTRYPOINT /stablehand
 
-ENV RANCHER_SERVER="http://localhost/"
-ENV RANCHER_ACCESS_KEY=""
-ENV RANCHER_SECRET_KEY=""
+ENV CATTLE_URL="http://localhost/"
+ENV CATTLE_ACCESS_KEY=""
+ENV CATTLE_SECRET_KEY=""
 
 ARG VERSION="development"
 LABEL VERSION=$VERSION

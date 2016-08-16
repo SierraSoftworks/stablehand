@@ -21,9 +21,9 @@ Stablehand is also available as a Docker image at `sierrasoftworks/stablehand`, 
 config.
 
 ```
-RANCHER_SERVER=https://localhost
-RANCHER_ACCESS_KEY=abcdefg
-RANCHER_SECRET_KEY=abcdefg
+CATTLE_URL=https://localhost
+CATTLE_ACCESS_KEY=abcdefg
+CATTLE_SECRET_KEY=abcdefg
 ```
 
 ```
@@ -32,6 +32,16 @@ docker run --rm --env-file stablehand.env sierrasoftworks/stablehand stablehand 
 
 # Remove hosts which are in the inactive state
 docker run --rm --env-file stablehand.env sierrasoftworks/stablehand stablehand remove --state=inactive
+```
+
+### On Rancher
+If you're running Stablehand on Rancher, you'll want to set the following labels to have Rancher automatically populate the `CATTLE_URL`,
+`CATTLE_ACCESS_KEY` and `CATTLE_SECRET_KEY` environment variables.
+
+```yml
+labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: environment
 ```
 
 ## `man stablehand`
@@ -55,9 +65,9 @@ COMMANDS:
      purge       [HOST_ID]
      help, h     Shows a list of commands or help for one command
 GLOBAL OPTIONS:
-   --server value  The URL of your Rancher server [%RANCHER_SERVER%]
-   --key value     The access key used to sign into your Rancher server [%RANCHER_ACCESS_KEY%]
-   --secret value  The secret key used to sign into your Rancher server [%RANCHER_SECRET_KEY%]
+   --server value  The URL of your Rancher server [%CATTLE_URL%]
+   --key value     The access key used to sign into your Rancher server [%CATTLE_ACCESS_KEY%]
+   --secret value  The secret key used to sign into your Rancher server [%CATTLE_SECRET_KEY%]
    --help, -h      show help
    --version, -v   print the version
    

@@ -21,19 +21,19 @@ func main() {
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:        "server",
-			EnvVar:      "RANCHER_SERVER",
+			EnvVar:      "CATTLE_URL",
 			Destination: &config.Rancher.Server,
 			Usage:       "The URL of your Rancher server",
 		},
 		cli.StringFlag{
 			Name:        "key",
-			EnvVar:      "RANCHER_ACCESS_KEY",
+			EnvVar:      "CATTLE_ACCESS_KEY",
 			Destination: &config.Rancher.AccessKey,
 			Usage:       "The access key used to sign into your Rancher server",
 		},
 		cli.StringFlag{
 			Name:        "secret",
-			EnvVar:      "RANCHER_SECRET_KEY",
+			EnvVar:      "CATTLE_SECRET_KEY",
 			Destination: &config.Rancher.SecretKey,
 			Usage:       "The secret key used to sign into your Rancher server",
 		},
