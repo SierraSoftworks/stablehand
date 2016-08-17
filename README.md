@@ -44,6 +44,38 @@ labels:
     io.rancher.container.agent.role: environment
 ```
 
+A typical example for the `docker-compose.yml` on Rancher.
+
+- You can add `restart: always` for the two services to let them continually be started again by Rancher after their process exited
+- Use `scale: 1` for each of them in `rancher-compose.yml`
+
+```yml
+stablehand-deactivate-reconnecting:
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.container.start_once: 'true'
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: environment
+  entrypoint:
+  - /stablehand
+  command:
+  - deactivate
+  - --agent-state=reconnecting
+  image: sierrasoftworks/stablehand
+stablehand-remove-inactive:
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.container.start_once: 'true'
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: environment
+  entrypoint:
+  - /stablehand
+  command:
+  - remove
+  - --state=inactive
+  image: sierrasoftworks/stablehand
+```
+
 ## `man stablehand`
 
 ```
