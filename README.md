@@ -44,18 +44,26 @@ labels:
     io.rancher.container.agent.role: environment
 ```
 
-A typical example for the `docker-compose.yml` on Rancher.
+A typical example for the `docker-compose.yml` on Rancher would look like the following, it makes use of [rancher-cron](https://github.com/SocialEngine/rancher-cron) to provide scheduled tasks and will run the cleanup
+tasks once every 15m to 1h. You can easily change this by modifying the corresponding `com.socialengine.rancher-cron.schedule`
+label on each service.
 
-- You can add `restart: always` for the two services to let them continually be started again by Rancher after their process exited
 - Use `scale: 1` for each of them in `rancher-compose.yml`
 
 ```yml
+cron:
+  labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.scheduler.affinity:host_label: role=worker
+    io.rancher.container.agent.role: environment
+  image: socialengine/rancher-cron:0.2.0
 stablehand-deactivate-reconnecting:
   labels:
     io.rancher.container.pull_image: always
     io.rancher.container.start_once: 'true'
     io.rancher.container.create_agent: 'true'
     io.rancher.container.agent.role: environment
+    com.socialengine.rancher-cron.schedule: '@every 15m'
   entrypoint:
   - /stablehand
   command:
@@ -68,6 +76,7 @@ stablehand-remove-inactive:
     io.rancher.container.start_once: 'true'
     io.rancher.container.create_agent: 'true'
     io.rancher.container.agent.role: environment
+    com.socialengine.rancher-cron.schedule: '@every 1h'
   entrypoint:
   - /stablehand
   command:
